@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'; // Added useEffect, useState
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext'; 
-import PageList from '../../components/Dashboard/PageList'; 
-import UserList from '../../components/Dashboard/UserList'; 
-import UserRoleTable from '../../components/Dashboard/UserRoleTable';
-import PermissionEditPanel from '../../components/Dashboard/PermissionEditPanel'; // Import PermissionEditPanel
-import pageService from '../../services/pageService'; // Import pageService
+import PageList from '../components/Dashboard/PageList'; 
+import UserList from '../components/Dashboard/UserList'; 
+import UserRoleTable from '../components/Dashboard/UserRoleTable';
+import PermissionEditPanel from '../components/Dashboard/PermissionEditPanel';
+import pageService from '../services/pageService';
 
 const AdminDashboardPage = () => {
     const { user } = useAuth(); 
@@ -12,25 +12,23 @@ const AdminDashboardPage = () => {
     const [selectedUserForPermissions, setSelectedUserForPermissions] = useState(null);
     const [showPermissionPanel, setShowPermissionPanel] = useState(false);
     const [allPagesForPanel, setAllPagesForPanel] = useState([]);
-    const [userRoleTableKey, setUserRoleTableKey] = useState(0); // To force re-fetch if needed
+    const [userRoleTableKey, setUserRoleTableKey] = useState(0);
     const [panelError, setPanelError] = useState('');
-
 
     useEffect(() => {
         const fetchPagesForPanel = async () => {
             try {
                 setPanelError('');
-                const pagesData = await pageService.getAllPages(); // Assuming UserRoleTable gets its own full data
+                const pagesData = await pageService.getAllPages();
                 setAllPagesForPanel(pagesData);
             } catch (error) {
                 console.error("Failed to fetch pages for panel:", error);
                 setPanelError('Could not load page list for permission editing.');
-                setAllPagesForPanel([]); // Ensure it's an empty array on error
+                setAllPagesForPanel([]);
             }
         };
         fetchPagesForPanel();
     }, []);
-
 
     if (!user) {
         return <p>Loading user information or not authorized...</p>;
@@ -49,10 +47,8 @@ const AdminDashboardPage = () => {
     const handlePermissionsSaved = () => {
         setUserRoleTableKey(prev => prev + 1); 
         handleClosePermissionPanel();
-        // TODO: Show success message
-        alert("Permissions saved (mock). UserRoleTable will refresh.");
+        alert("Permissions saved actions were processed. UserRoleTable will refresh."); // Updated alert
     };
-
 
     return (
         <div className="container-fluid mt-3">
@@ -77,39 +73,37 @@ const AdminDashboardPage = () => {
                             User Management & Permissions Overview
                         </div>
                         <div className="card-body">
-                            <h4>Available Pages (Read-only list)</h4>
+                            <h4 className="mt-3">Available Pages</h4>
                             <PageList />
                             <hr />
-                            <h4>All Users (Read-only list)</h4>
+                            <h4 className="mt-3">All Users</h4>
                             <UserList /> 
                             <hr />
-                            <h4>User Permissions Table</h4>
-                            {/* Pass onEditUser to UserRoleTable */}
+                            <h4 className="mt-3">User Permissions Table</h4>
                             <UserRoleTable key={userRoleTableKey} onEditUser={handleEditUserPermissions} /> 
                         </div>
                     </div>
                 </div>
                 <div className="col-md-4">
                     {panelError && <div className="alert alert-danger">{panelError}</div>}
-                    {showPermissionPanel && selectedUserForPermissions ? (
+                    {showPermissionPanel && selectedUserForPermissions && allPagesForPanel.length > 0 ? (
                         <PermissionEditPanel
                             selectedUserData={selectedUserForPermissions}
                             allPages={allPagesForPanel}
                             onClose={handleClosePermissionPanel}
                             onSavePermissions={handlePermissionsSaved} 
                         />
+                    ) : showPermissionPanel && selectedUserForPermissions && allPagesForPanel.length === 0 && !panelError ? (
+                        <div className="card"><div className="card-body"><p>Loading page data for panel...</p></div></div>
                     ) : (
                         <div className="card">
                             <div className="card-body">
                                 <h5 className="card-title">Manage User Permissions</h5>
-                                <p className="text-muted">Select a user from the 'Edit' button in the User Permissions Table to manage their page access.</p>
+                                <p className="text-muted">Select a user's 'Edit' button in the User Permissions Table to manage their page access.</p>
                             </div>
                         </div>
                     )}
                 </div>
-            </div>
-            
-            <div className="mt-4">
             </div>
         </div>
     );
