@@ -1,0 +1,223 @@
+# Super Admin Dashboard .gitignore
+
+# ===== PYTHON/DJANGO BACKEND =====
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# Django specific
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+/media
+/static
+settings_local.py
+
+# Django migrations (uncomment if you want to ignore them)
+# */migrations/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# ===== REACT/NODE.JS FRONTEND =====
+
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Production build
+/build
+/dist
+
+# Testing
+/coverage
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage
+.grunt
+
+# Bower dependency directory
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons
+build/Release
+
+# Dependency directories
+jspm_packages/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache
+.cache
+.parcel-cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# rollup.js default build output
+dist/
+
+# Uncomment the public line if your project uses Gatsby
+# public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# ===== GENERAL =====
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs
+logs
+*.log
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===== PROJECT SPECIFIC =====
+
+# Secret keys and sensitive data
+secrets.json
+*.key
+*.pem
+
+# Local configuration files
+config_local.py
+local_config.json
+
+# Test files
+test_uploads/
+temp_files/
+
+# Documentation builds
+docs/_build/
+site/
+
+# Backup files
+*.bak
+*.backup
+
+# Cache
+.cache/
+*.cache
+
+# ===== GITHUB CODESPACES =====
+
+# Codespace specific files
+.devcontainer/
+.vscode/settings.json
+
+# Note: Some .vscode files might be useful to keep for shared settings
+# Remove the .vscode/ line above if you want to share VS Code settings with your team
