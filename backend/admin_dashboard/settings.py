@@ -73,15 +73,42 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
 }
 
-# CORS settings for Codespaces - more permissive for development
-CORS_ALLOW_ALL_ORIGINS = True  # Only for development!
+# CORS settings for Codespaces
+CORS_ALLOW_ALL_ORIGINS = False # Set to False to use specific origins or regexes
+
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "https://localhost:3000",
+    "http://localhost:3000", # For local development if ever used
+    "https://localhost:3000", # For local development if ever used
+    "https://animated-fiesta-4j9vx6rxpx6274vv-3000.app.github.dev", # User's specific frontend Codespace URL
 ]
 
-# Allow CORS for all origins during development (Codespaces needs this)
+# Alternatively, or additionally for more dynamic Codespace URLs:
+# CORS_ALLOWED_ORIGIN_REGEXES = [
+#     r"^https://.*\.app\.github\.dev$", # Allows any subdomain of app.github.dev (like Codespaces)
+# ]
+# If using CORS_ALLOWED_ORIGIN_REGEXES, you might not need the explicit URL in CORS_ALLOWED_ORIGINS
+# For now, let's stick to the explicit URL first. If it works, we can consider regexes.
+
 CORS_ALLOW_CREDENTIALS = True
+
+# Optional: If problems persist, you can also specify allowed methods and headers,
+# though defaults are usually fine.
+# CORS_ALLOW_METHODS = [
+#     'DELETE',
+#     'GET',
+#     'OPTIONS',
+#     'PATCH',
+#     'POST',
+#     'PUT',
+# ]
+# CORS_ALLOW_HEADERS = [
+#     'accept',
+#     'authorization',
+#     'content-type',
+#     'origin',
+#     'x-csrftoken',
+#     'x-requested-with',
+# ]
 
 ROOT_URLCONF = "admin_dashboard.urls"
 
