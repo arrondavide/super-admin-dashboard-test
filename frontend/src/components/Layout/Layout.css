@@ -1,0 +1,17 @@
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.layout-header {
+    /* Add any specific header styling if needed */
+}
+
+.layout-main-content {
+    flex-grow: 1; /* Ensures main content takes up available space */
+}
+
+.layout-footer {
+    /* Add any specific footer styling if needed */
+}
